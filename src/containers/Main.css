@@ -1,3 +1,14 @@
 .main {
-    color: red;
+    /* color: red; */
+    padding: 10px 10px;
+    -webkit-app-region: no-drag;
+}
+
+.main button {
+    padding: 16px 32px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    user-select: none;
+    cursor: pointer;
+    box-shadow: 1px 2px 4px grey;
 }

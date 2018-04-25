@@ -1,22 +1,25 @@
-const electron = require('electron')
-// Module to control application life.
-const app = electron.app
-// Module to create native browser window.
-const BrowserWindow = electron.BrowserWindow
-
+const { app, BrowserWindow, ipcMain, Menu } = require('electron');
 const path = require('path')
 const url = require('url')
 
-// Keep a global reference of the window object, if you don't, the window will
-// be closed automatically when the JavaScript object is garbage collected.
+const selenium = require('selenium-webdriver');
+const keys = require('./config/keys');
+
 let mainWindow
 
 function createWindow () {
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 800, height: 600})
+  mainWindow = new BrowserWindow({width: 800,
+                                  height: 600,
+                                  frame: false,
+                                  webPreferences: {
+                                    nodeIntegration: false,
+                                    preload: __dirname + '/preload.js'
+                                  }})
 
   // and load the index.html of the app.
   mainWindow.loadURL("http://localhost:3000")
+  mainWindow.webContents.openDevTools();
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
@@ -50,4 +53,21 @@ app.on('activate', function () {
   if (mainWindow === null) {
     createWindow()
   }
+})
+
+ipcMain.on('ping', () => {
+  console.log("ping");
+  mainWindow.webContents.send("pong");
+  const driver = new selenium.Builder()
+    .withCapabilities(selenium.Capabilities.chrome())
+    .build();
+  const By = require('selenium-webdriver').By
+    driver.get("https://crm.irepair.gr/auth/login");
+
+    driver.findElement(By.xpath('//*[@id="identity"]')).sendKeys(keys.userName);
+    driver.findElement(By.xpath('//*[@id="password"]')).sendKeys(keys.passWord);
+    driver.findElement(By.className('btn')).click();
+    driver.wait(selenium.until.elementLocated({className: 'close'}));
+    driver.findElement(By.className('close')).click();
+
 })
