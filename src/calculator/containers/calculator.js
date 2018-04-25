@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import classes from "./calculator.css";
+
+
 import Switch from 'react-switch';
 
 
@@ -8,7 +11,8 @@ export default class SwitchExample extends Component {
         super(props);
 
         this.state = {
-            checked: false
+            checked: false,
+            total: "1€"
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -40,8 +44,17 @@ export default class SwitchExample extends Component {
                     onChange={this.handleChange}
                     checked={this.state.checked}
                     id="normal-switch"
-                    boxShadow="1px 1px 1px grey"/>
+                    boxShadow="1px 1px 5px black"
+                    handleDiameter={22}
+                    offColor="#e85050"
+                    uncheckedIcon={false}
+                    checkedIcon={false}
+                    height={26}
+                    width={50}
+                    />
+
                     {indicator}
+                    <input className={classes.input}/>
             </label> 
         );
     }
