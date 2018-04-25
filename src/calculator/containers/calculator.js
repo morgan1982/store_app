@@ -12,17 +12,43 @@ export default class SwitchExample extends Component {
 
         this.state = {
             checked: false,
-            total: "1€"
+            total: "1€",
+            input_val: 0
         }
 
         this.handleChange = this.handleChange.bind(this);
+        this.handleInput = this.handleInput.bind(this);
+        this.totalPrice  = this.totalPrice.bind(this);
     }
 
     handleChange () {
         let checked = false;
         this.state.checked ? checked = false : checked = true;
         this.setState({ checked });
+
     }
+    handleInput (e) {
+        this.setState({
+            input_val: e.target.value
+        })
+        this.totalPrice();
+    }
+    totalPrice () {
+        let price;
+        let init_price = this.state.input_val
+        // console.log(price);
+        this.state.checked ? price = init_price * 1.0 / 1.24 : price = init_price;
+        Math.round(price, 2);
+        console.log("the price is", price);
+        this.setState({
+            total: price
+        })
+    }
+    testing = () => {
+        const total = this.state.total;
+        return <h1>{total}</h1>
+        console.log("changed")
+    } 
 
 
 
@@ -35,9 +61,11 @@ export default class SwitchExample extends Component {
             ) : (
                 <h1 style={{"color": "red"}}>OFF</h1>
             )
+            const test = this.testing();
 
 
         return (
+            <div>
             <label htmlFor="normal-switch">
                 <span>Switch with default style</span>
                 <Switch 
@@ -52,10 +80,16 @@ export default class SwitchExample extends Component {
                     height={26}
                     width={50}
                     />
+                </label> 
+                {indicator}
+                <input className={classes.input}
+                       onChange={this.handleInput}
+                       value={this.state.input_val}/>
+                <h2><strong>Total</strong></h2>
+                <h2>{this.state.total}</h2>
+                {test}
+            </div>
 
-                    {indicator}
-                    <input className={classes.input}/>
-            </label> 
         );
     }
 }
