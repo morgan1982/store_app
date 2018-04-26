@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import classes from "./calculator.css";
 
-
-import Switch from 'react-switch';
+import Switch from '../components/switch'
 
 
 export default class SwitchExample extends Component {
@@ -12,8 +11,7 @@ export default class SwitchExample extends Component {
 
         this.state = {
             nr_checked: false,
-            lc_checked: true,
-            total: "1€",
+            lc_checked: false,
             input_val: 0,
             ticked: true
         }
@@ -21,6 +19,7 @@ export default class SwitchExample extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleInput = this.handleInput.bind(this);
         this.totalPrice  = this.totalPrice.bind(this);
+        this.handleLcChange  = this.handleLcChange.bind(this);
     }
 
     handleChange () {
@@ -28,6 +27,13 @@ export default class SwitchExample extends Component {
         this.state.nr_checked ? nr_checked = false : nr_checked = true;
         this.setState({ nr_checked });
 
+    }
+    handleLcChange () {
+        let lc_checked = false;
+        this.state.lc_checked ? lc_checked = false : lc_checked = true;
+        this.setState({
+            lc_checked
+        })
     }
     handleInput (e) {
         let price = e.target.value;
@@ -68,30 +74,41 @@ export default class SwitchExample extends Component {
 
 
         return (
-            <div>
-            <label htmlFor="normal-switch">
-                <Switch 
-                    onChange={this.handleChange}
-                    checked={this.state.nr_checked}
-                    id="normal-switch"
-                    boxShadow="1px 1px 5px black"
-                    handleDiameter={22}
-                    offColor="#e85050"
-                    uncheckedIcon={false}
-                    checkedIcon={false}
-                    height={26}
-                    width={50}
-                    />
-                </label> 
+            <div className={classes.input_container}>
                 {indicator}
-                <input className={classes.input}
-                       onChange={this.handleInput}
-                       value={this.state.input_val}/>
+                <div>
+                    <input className={classes.input}
+                           placeholder="amount"
+                           onChange={this.handleInput}
+                           value={this.state.input_val}/>
+                           <label htmlFor="input" className={classes.input_label}>hello</label> 
+                </div> 
                 <h2><strong>Total</strong></h2>
                 <h3>{price}</h3>
                 <input type="checkbox"
                        checked={this.state.ticked}
                        onChange={this.checkboxChange}/>
+                       <div className={classes.switchContainer}>
+                       <div>nr</div>
+                       <div className={classes.switch}>
+                       <Switch
+                            handleChange={this.handleChange}
+                            checked={this.state.nr_checked}
+                          />
+                       </div>
+
+                       </div>
+                       <div className={classes.switchContainer}>                       
+                       <div>lc</div>
+                       <div className={classes.switch} >
+                       <Switch
+                          handleChange={this.handleLcChange}
+                          checked={this.state.lc_checked}
+                          />
+                       </div>
+
+                       </div>
+
             </div>
 
         );
