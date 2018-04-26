@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import classes from "./calculator.css";
 
-import Switch from '../components/switch'
+import Switch from '../components/switch';
+import Input from '../components/input';
 
 
 export default class SwitchExample extends Component {
@@ -76,13 +77,8 @@ export default class SwitchExample extends Component {
         return (
             <div className={classes.input_container}>
                 {indicator}
-                <div>
-                    <input className={classes.input}
-                           placeholder="amount"
-                           onChange={this.handleInput}
-                           value={this.state.input_val}/>
-                           <label htmlFor="input" className={classes.input_label}>hello</label> 
-                </div> 
+                <Input handleInput={this.handleInput}
+                       input_val={this.state.input_val}/>
                 <h2><strong>Total</strong></h2>
                 <h3>{price}</h3>
                 <input type="checkbox"
