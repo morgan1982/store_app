@@ -1,7 +1,6 @@
 import React from 'react';
 import SwitchComp from 'react-switch';
 
-
 const Switch = (props) => (
 
     <SwitchComp 
