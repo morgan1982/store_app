@@ -4,6 +4,8 @@ import classes from "./calculator.css";
 import Switch from '../components/switch';
 import Input from '../components/input';
 
+// import Calculator from '../utils/discount';
+import {discount, customDiscount, fixedDiscount} from '../utils/discount';
 
 export default class SwitchExample extends Component {
 
@@ -98,6 +100,8 @@ export default class SwitchExample extends Component {
 
 
     render() {
+        console.log(fixedDiscount(50, true, true)); // test nr lc
+        console.log("custom disc", customDiscount(100, 24)) // test the customdisck method (need a combobox or something)
         console.log(this.state.prices);
         const price = this.totalPrice(this.state.input_val);
 

@@ -1,6 +1,6 @@
-export default class PriceCalculator {
+ module.exports = {
 
-    discount = (price, num) => {
+    discount (price, num) {
         let finalPrice = null;
         let numPrice = parseFloat(price);
         let discount = null;
@@ -21,15 +21,27 @@ export default class PriceCalculator {
         }
         console.log("final price -- num ", finalPrice, num);
         return finalPrice;
-    }
+    },
 
-    fixedDiscount = (val, nr, lc) {
+    fixedDiscount (val, nr=false, lc=false) {
         let total = parseFloat(val);
-        total = nr ? initVal / 1.24 : initVal;
-        total = lc ? initVal / 1.1 : initVal;
-        total.fixed(2);
+        total = nr ? total / 1.24 : total;
+        total = lc ? total / 1.1 : total;
+        total = Math.round(total * 100) / 100;
+        console.log("total", total);
         return total;
-    } 
+    },
+
+    customDiscount (num, r) {
+        let price = parseFloat(num);
+        let rate = parseFloat(r);
+        rate = price * (rate / 100);
+        price = (price - rate).toFixed(2); 
+
+        return price;
+        
+    }
 
 
 }
+
