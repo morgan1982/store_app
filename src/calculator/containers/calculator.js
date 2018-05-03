@@ -6,6 +6,7 @@ import Input from '../components/input';
 
 // import Calculator from '../utils/discount';
 import {discount, customDiscount, fixedDiscount} from '../utils/discount';
+import Combobox from '../components/combobox';
 
 export default class SwitchExample extends Component {
 
@@ -17,8 +18,10 @@ export default class SwitchExample extends Component {
             lc_checked: false,
             input_val: 0,
             ticked: true,
-            price_input: [1, 2, 3, 4],
-            prices: {}
+            price_input: [1, 2, 3], // num of input boxes
+            prices: {},
+            selectedOption: '',
+            customDiscount: null
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -61,36 +64,49 @@ export default class SwitchExample extends Component {
         })
         console.log(e.target.checked)
     }
-    discount = (price, num) => {
-        let finalPrice = null;
-        let numPrice = parseFloat(price);
-        let discount = null;
-        switch (true) {
-            case num === 1:
-                finalPrice = numPrice;
-                break;
-            case num === 2:
-                discount = numPrice * .5;
-                finalPrice = (numPrice - discount).toFixed(2);
-                break;
-            case num >= 3:
-                discount = numPrice * 0.75
-                finalPrice =(numPrice - discount).toFixed(2);
-                break;
-            default:
-                finalPrice = numPrice;
-        }
-        console.log("final price -- num ", finalPrice, num);
-        return finalPrice;
-    } 
+
     priceChange = (e,key) => { // map prices to an object
         const enumer = parseInt(key, 10)
         const prices = {...this.state.prices}
         const repair_num = `repair${key + 1}`;
-        const price_num = this.discount(e.target.value, enumer +1);
+        const price_num = discount(e.target.value, enumer +1);
         prices[repair_num] = price_num;
-        console.log(prices)
+        // console.log(prices)
         this.setState({prices})
+
+    }
+
+    comboChange = (selectedOption) => {
+        // console.log(selectedOption);
+        this.setState({
+            selectedOption
+        })
+    }
+
+    inputChange = (val) => {
+        // console.log(val);
+        this.setState({
+            customDiscount: val
+        })
+    }
+    addRepair = () => {
+        const list = [...this.state.price_input];
+        list.push(list.length + 1);
+        this.setState({
+            price_input: list
+        })
+
+
+        console.log(list);
+    }
+    subRepair = () => {
+        const list = [...this.state.price_input];
+        if (list.length > 1) {
+                list.splice(-1, 1);
+                this.setState({
+                    price_input: list
+            })
+        }
 
     }
 
@@ -100,8 +116,10 @@ export default class SwitchExample extends Component {
 
 
     render() {
-        console.log(fixedDiscount(50, true, true)); // test nr lc
-        console.log("custom disc", customDiscount(100, 24)) // test the customdisck method (need a combobox or something)
+        console.log(this.state.customDiscount);
+        // console.log("combostate ", this.state.selectedOption);
+        // console.log(fixedDiscount(50, true, true)); // test nr lc
+        // console.log("custom disc", customDiscount(100, 24)) // test the customdisck method (need a combobox or something)
         console.log(this.state.prices);
         const price = this.totalPrice(this.state.input_val);
 
@@ -136,7 +154,6 @@ export default class SwitchExample extends Component {
                             checked={this.state.nr_checked}
                           />
                        </div>
-
                        </div>
                        <div className={classes.switchContainer}>                       
                        <div>lc</div>
@@ -147,15 +164,14 @@ export default class SwitchExample extends Component {
                             />
                         </div>
                        </div>
+                            <button onClick={this.addRepair}>+</button>
+                            <button onClick={this.subRepair}>-</button>
                             {priceInput}
-                        <select name="repairs">
-                            <option value="1">first</option>
-                            <option value="2">second</option>
-                            <option value="3">third</option>
-                            <option value="4">forth</option>
-                            <option value="5">fifth</option>
-                            <option value="6">sixth</option>                            
-                        </select>
+                        <Combobox 
+                            selectedOption={this.state.selectedOption}
+                            handleChange={this.comboChange}
+                            inputChange={this.inputChange}
+                            />
             </div>
 
         );

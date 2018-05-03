@@ -18,7 +18,7 @@ export default class Main extends Component {
 
         return (
         <div className={classes.main}>
-            <button onClick={this.props.emit}>emit</button>
+            <button className={classes.button}onClick={this.props.emit}>emit</button>
             <Switch/>
                 
         </div>

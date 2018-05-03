@@ -4,7 +4,7 @@
     -webkit-app-region: no-drag;
 }
 
-.main button {
+.button {
     padding: 16px 32px;
     font-weight: bold;
     font-family: Arial, Helvetica, sans-serif;

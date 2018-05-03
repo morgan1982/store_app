@@ -8,3 +8,21 @@
 .input {
   margin-top: 5px;
 }
+.btn {
+    font-size: 2rem;
+    color: #0099cc;
+    background-color: transparent;
+    border: 2px solid #0099cc;
+    border-radius: 5px;
+    text-transform: uppercase;
+    /* padding: 2px 5px; */
+    /* border: 1px solid darkcyan; */
+    width: 10px;
+    /* text-align: center; */
+    /* text-align: center !important; */
+    /* padding: 2% 5% !important; */
+}
+.btn:hover {
+    border: 2px solid white;
+    box-shadow: 2px 2px 2px grey;
+}

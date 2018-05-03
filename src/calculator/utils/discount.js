@@ -19,7 +19,7 @@
             default:
                 finalPrice = numPrice;
         }
-        console.log("final price -- num ", finalPrice, num);
+        // console.log("final price -- num ", finalPrice, num);
         return finalPrice;
     },
 
