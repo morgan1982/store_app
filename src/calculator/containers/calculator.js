@@ -117,7 +117,7 @@ export default class SwitchExample extends Component {
 
     render() {
         console.log(this.state.customDiscount);
-        // console.log("combostate ", this.state.selectedOption);
+        console.log("combostate ", this.state.selectedOption);
         // console.log(fixedDiscount(50, true, true)); // test nr lc
         // console.log("custom disc", customDiscount(100, 24)) // test the customdisck method (need a combobox or something)
         console.log(this.state.prices);
@@ -127,7 +127,7 @@ export default class SwitchExample extends Component {
             const indicator = toggle ? (
                 <h1 style={{"color": "green"}}>ON</h1>
             ) : (
-                <h1 style={{"color": "red"}}>OFF</h1>
+                <h1 style={{"color": "tomato"}}>OFF</h1>
             )
         const priceInput = this.state.price_input.map((e, key) => (
             <div className={classes.input} key={key}>
@@ -137,34 +137,36 @@ export default class SwitchExample extends Component {
 
 
         return (
-            <div className={classes.input_container}>
+            <div className={classes.container}>
                 {indicator}
-                <Input handleInput={this.handleInput}
-                       input_val={this.state.input_val}/>
-                <h2><strong>Total</strong></h2>
-                <h3>{price}</h3>
-                <input type="checkbox"
-                       checked={this.state.ticked}
-                       onChange={this.checkboxChange}/>
+                <div className={classes.total}>
+                    <h2><strong>Total</strong></h2>
+                    <h3>{price}</h3>                
+                </div>
+                    <input type="checkbox"
+                        checked={this.state.ticked}
+                        onChange={this.checkboxChange}/>
                        <div className={classes.switchContainer}>
-                       <div>nr</div>
-                       <div className={classes.switch}>
-                       <Switch
-                            handleChange={this.handleChange}
-                            checked={this.state.nr_checked}
-                          />
-                       </div>
-                       </div>
-                       <div className={classes.switchContainer}>                       
-                       <div>lc</div>
-                        <div className={classes.switch} >
-                            <Switch
-                            handleChange={this.handleLcChange}
-                            checked={this.state.lc_checked}
-                            />
+                        <div className={classes.switch}>
+                            <div>nr</div>
+                            <div className={classes.switchBtn}>
+                                <Switch
+                                    handleChange={this.handleChange}
+                                    checked={this.state.nr_checked}/>       
+                            </div>
                         </div>
-                       </div>
-                            <button onClick={this.addRepair}>+</button>
+                        <div className={classes.switch} >
+                            <div>lc</div>
+                            <div className={classes.switchBtn}>
+                                <Switch
+                                    handleChange={this.handleLcChange}
+                                    checked={this.state.lc_checked}/>         
+                            </div>
+
+                        </div>
+                       </div>                    
+                       <div className={classes.inputs}>
+                       <button onClick={this.addRepair}>+</button>
                             <button onClick={this.subRepair}>-</button>
                             {priceInput}
                         <Combobox 
@@ -172,6 +174,8 @@ export default class SwitchExample extends Component {
                             handleChange={this.comboChange}
                             inputChange={this.inputChange}
                             />
+                       </div>
+
             </div>
 
         );

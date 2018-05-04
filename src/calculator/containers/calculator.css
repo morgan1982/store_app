@@ -1,9 +1,92 @@
-.switchContainer {
+.container {
+    /* border: 1px solid gray; */
+    border-bottom: 3px solid hotpink;
+    margin-top: 50px;
+    box-shadow: 1px 4px 4px hotpink;
+    padding: 50px 50px;
+    height: 400px;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 40% 60%;
+}
+/* .switchContainer {
+    background-color: antiquewhite;
+    border-radius: 5px;
+    height: 40px;
+    width: 160px; 
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    align-items: center;
+} */
+.switchContainer {
+    width: 210px;
+    height: 40px;
+    background-color: greenyellow;
+    border-radius: 10px;
 }
+/* .switchContainer > div:nth-child(1) {
+    border: 1px solid yellow;
+    width: 70px;
+    display: inline-block;
+}
+.switchContainer > div:nth-child(2) {
+    border: 1px solid orange;
+    width: 70px;
+    display: inline-block;
+    float: right;
+} */
 .switch {
-    padding-left: 5px;
+    position: relative;
+    top: 5%;
+    display: inline-block;
+    width: 100px;
+    /* border: 1px solid yellow; */
+    /* display: flex;
+    flex-direction: row;
+    font-weight: bold;
+    align-items: center;
+    justify-content: center;
+    padding-left: 5px; */
+}
+.switch > :first-child {
+    /* color: red; */
+    position: relative;
+    bottom: 4px;
+    left: 10%;
+    display: inline-block;
+    font-weight: bold;
+    /* position: absolute; */
+    /* top: 5; */
+    /* align-self: normal; */
+    /* flex-basis: 100%; */
+}
+.switch > div:nth-child(even) {
+    /* padding: auto; */
+    position: relative;
+    top: 4px;
+    margin-left: 20%;
+    display: inline-block;
+    width: 50px;
+    /* border: 1px solid red; */
+}
+.switchBtn {
+    /* display: block; */
+    margin-left: 5px;
+    /* color: red; */
+}
+.total {
+    padding: 5px 10px;
+    border: 1px solid black;
+    height: 50px;
+    display:flex;  
+    flex-direction: row;
+}
+.total h3 {
+    /* margin-left: 2em; */
+    padding-left: 30px;
+    height: 20px;
+    border-bottom: 1px solid black;
 }
 .input {
   margin-top: 5px;
